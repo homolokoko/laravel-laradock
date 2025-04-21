@@ -55,3 +55,11 @@ Route::prefix('/resource-mapping')->group(function(){
         Route::get('{id}/people-list', [\App\Http\Controllers\ResoureMap\CitizenMap::class,'peopleByCity']);
     });
 });
+
+Route::prefix('/file-upload')->group(function(){
+    Route::patch('/single',[\App\Http\Controllers\FileUploadController::class,'single']);
+});
+
+Route::prefix('/qr-code')->group(function(){
+    Route::get('/',[\App\Http\Controllers\QrCodeController::class,'index']);
+});
