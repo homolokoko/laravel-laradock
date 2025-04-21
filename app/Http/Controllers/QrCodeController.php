@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Setup;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Setup;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class QrCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Setup\Category::paginate();
-        return response()->json($categories);
+        //
+        $data = DB::table('tblticket_info')
+                ->where('tblID','>','1614')->paginate(50);
+        return response()->json($data, 200);
     }
 
     /**
@@ -39,9 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return ['message'=> 'Ok'];
-        $category = Setup\Category::create(['name'=>$request->name]);
-        return response()->json($category);
+        //
     }
 
     /**
@@ -52,8 +49,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Setup\Category::where('id',$id);
-        return response()->json($category->first());
+        //
     }
 
     /**
@@ -76,9 +72,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Setup\Category::where('id',$id);
-        $category->update(['name'=>$request->name]);
-        return response()->json($category->first());
+        //
     }
 
     /**
@@ -89,8 +83,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Setup\Category::where('id',$id);
-        $category->delete();
-        return response()->json($category->withTrashed()->first());
+        //
     }
 }
